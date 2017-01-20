@@ -17,17 +17,17 @@ Below properties would configure the application to use the https
 === Generate self-signed certificate using keytool
 
 [source,xml,indent=0]
-	keytool -genkey -alias springbootssl -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 365 -keypass privatepassword -keystore identity.jks -storepass password
+	keytool -genkey -alias springbootssl -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 365 -keypass privatepassword -keystore keystore.jks -storepass password
 
 === Export the certificate
 
 [source,xml,indent=0]
-	keytool  -export -alias springbootssl -file root.cer -keystore identity.jks -storepass password
+	keytool  -export -alias springbootssl -file root.cer -keystore keystore.jks -storepass password
 
 === import the certificate
 
 [source,xml,indent=0]
-	 keytool -import -alias springbootssl -file root.cer -keystore trust.jks -storepass password
+	 keytool -import -alias springbootssl -file root.cer -keystore keystore.jks -storepass password
 
 === Run the code with below command with maven
 
