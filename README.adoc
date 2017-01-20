@@ -1,0 +1,39 @@
+= Spring Boot SSL Sample
+
+Sample code and steps for configuring SSL with Spring boot
+
+Follow below steps:
+
+=== Setup code for SSL with Spring Boot
+
+Below properties would configure the application to use the https
+
+[souurce,xml,indent=0]
+	server.port=8443
+	server.ssl.key-store=classpath:keystore.jks
+	server.ssl.key-store-password=password
+	server.ssl.key-password=password
+
+=== Generate self-signed certificate using keytool
+
+[source,xml,indent=0]
+	keytool -genkey -alias springbootssl -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 365 -keypass privatepassword -keystore identity.jks -storepass password
+
+=== Export the certificate
+
+[source,xml,indent=0]
+	keytool  -export -alias springbootssl -file root.cer -keystore identity.jks -storepass password
+
+=== import the certificate
+
+[source,xml,indent=0]
+	 keytool -import -alias springbootssl -file root.cer -keystore trust.jks -storepass password
+
+=== Run the code with below command with maven
+
+[source,xml,indent=0]
+	mvn spring-boot:run
+	
+=== View the application in browser
+
+https://localhost:8443/
